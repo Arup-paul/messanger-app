@@ -113,7 +113,9 @@ const ChatLayout = ({ children }) => {
                         className="w-full"
                      />
                </div>
-               <div className="flex-1 overflow-auto">
+               <div className="flex flex-col h-[700px]">
+
+               <div className="flex-1  overflow-y-scroll  "  >
                    {
                        sortedConversations &&
                          sortedConversations.map((conversation) => (
@@ -127,6 +129,7 @@ const ChatLayout = ({ children }) => {
                               />
                          ))
                    }
+               </div>
                </div>
 
            </div>

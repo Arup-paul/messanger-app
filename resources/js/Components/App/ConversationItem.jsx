@@ -4,6 +4,7 @@ import GroupAvatar from "@/Components/App/GroupAvatar.jsx";
 import UserOptionsDropdown from "@/Components/App/UserOptionsDropdown.jsx";
 
 const ConversationItem = ({ conversation, selectedConversation = null,online=null }) => {
+    console.log("conversation",conversation)
      const page = usePage();
      const currentUser = page.props.auth.user;
      let classes = " border-transparent"
@@ -32,6 +33,7 @@ const ConversationItem = ({ conversation, selectedConversation = null,online=nul
                   )
               }
         >
+
             {
                 conversation.is_user && (
                     <UserAvatar user={conversation} online={online} />

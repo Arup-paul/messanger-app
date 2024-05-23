@@ -31,8 +31,11 @@ class MessageController extends Controller
       ]);
     }
 
-    public function byGroup(Group $group)
+    //===================== 3:03 hour
+
+    public function byGroup($id)
     {
+        $group = Group::findOrFail($id);
         $messages = Message::where('group_id', $group->id)
                             ->latest()
                             ->paginate(10);
