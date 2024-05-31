@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {PencilSquareIcon} from "@heroicons/react/16/solid/index.js";
 import TextInput from "@/Components/TextInput.jsx";
 import ConversationItem from "@/Components/App/ConversationItem.jsx";
+import {useEventBus} from "@/EventBus";
 
 const ChatLayout = ({ children }) => {
    const page = usePage();
@@ -12,6 +13,7 @@ const ChatLayout = ({ children }) => {
    const [localConversations,setLocalConversations] = useState(conversations);
    const [sortedConversations,setSortedConversations] = useState([]);
    const [onlineUsers,setOnlineUsers] = useState({});
+    const {on} = useEventBus();
 
    const isUsersOnline = (userId) =>  onlineUsers[userId];
 
@@ -48,6 +50,33 @@ const ChatLayout = ({ children }) => {
        }
    },[])
 
+    const messageCreated = (message) => {
+       setLocalConversations((oldUsers) => {
+              return oldUsers.map((user) => {
+                if(message.receiver_id && !user.is_group && (
+                    user.id == message.sender_id || user.id == message.receiver_id
+                )) {
+                    user.last_message = message.message;
+                    user.last_message_date = message.created_at;
+                    return user;
+                }
+
+                if (
+                    message.group_id &&
+                    user.is_group &&
+                    user.id == message.group_id
+                ) {
+                    user.last_message = message.message;
+                    user.last_message_date = message.created_at;
+                    return user;
+                }
+
+                return user;
+
+              })
+       })
+    }
+
     const onSearch = (e) => {
        const search = e.target.value.toLowerCase();
        setLocalConversations(
@@ -80,6 +109,16 @@ const ChatLayout = ({ children }) => {
             }),
         )
     },[localConversations])
+
+
+    useEffect(() => {
+        const offCreated = on('message.created',messageCreated);
+
+            return () => {
+                offCreated();
+            }
+
+    },[on])
 
     useEffect(() => {
         setLocalConversations(conversations)

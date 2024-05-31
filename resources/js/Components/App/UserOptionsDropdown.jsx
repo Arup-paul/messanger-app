@@ -13,14 +13,14 @@ const UserOptionsDropdown = ({conversation}) => {
         axios
             .post(route('user.blockUnblock',conversation.id))
             .then(response => {
-                console.log(response.data);
+
             }).catch((err) => {
             console.log(err);
         })
     }
 
     const changeUserRole = () => {
-        console.log('Change User Role');
+
         if (!conversation.is_user){
             return;
         }
@@ -28,7 +28,6 @@ const UserOptionsDropdown = ({conversation}) => {
         axios
             .post(route('user.changeRole',conversation.id))
             .then(response => {
-                console.log(response.data);
             }).catch((err) => {
             console.log(err);
         })

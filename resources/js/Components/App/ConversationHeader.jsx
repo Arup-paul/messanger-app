@@ -4,7 +4,7 @@ import UserAvatar from "@/Components/App/UserAvatar.jsx";
 import GroupAvatar from "@/Components/App/GroupAvatar.jsx";
 
 const ConversationHeader = ({ selectConversation }) => {
-    console.log(selectConversation)
+
     return (
         <>
             {

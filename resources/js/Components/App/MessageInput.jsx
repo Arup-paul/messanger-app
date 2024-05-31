@@ -9,6 +9,7 @@ import {
 import NewMessageInput from "@/Components/App/NewMessageInput.jsx";
 
 const MessageInput = ({conversation = null}) => {
+
     const [newMessage,setNewMessage] = useState("");
     const [inputErrorMessage,setInputErrorMessage] = useState("");
     const [messageSending,setMessageSending] = useState(false);
@@ -35,7 +36,7 @@ const MessageInput = ({conversation = null}) => {
         axios.post(route('message.store'),formData,{
             onUploadProgress: (progressEvent) => {
                 const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                console.log(progress)
+
             }
         }).then((response) => {
             setNewMessage("");
@@ -72,7 +73,7 @@ const MessageInput = ({conversation = null}) => {
                     onSend={onSendClick}
                     onChange={(e) => setNewMessage(e.target.value)}
                 />
-                <button onClick={onSendClick} className="btn btn-info rounded-1-none   absolute">
+                <button disabled={messageSending} onClick={onSendClick} className="btn btn-info rounded-1-none   absolute">
                     {
                         messageSending && (
                             <span className="loading loading-spinner loading-xs"></span>

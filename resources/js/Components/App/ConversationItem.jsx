@@ -2,9 +2,10 @@ import {Link, usePage} from "@inertiajs/react";
 import UserAvatar from "@/Components/App/UserAvatar.jsx";
 import GroupAvatar from "@/Components/App/GroupAvatar.jsx";
 import UserOptionsDropdown from "@/Components/App/UserOptionsDropdown.jsx";
+import {formatMessageDateShort} from "@/helpers";
 
 const ConversationItem = ({ conversation, selectedConversation = null,online=null }) => {
-    console.log("conversation",conversation)
+
      const page = usePage();
      const currentUser = page.props.auth.user;
      let classes = " border-transparent"
@@ -59,7 +60,7 @@ const ConversationItem = ({ conversation, selectedConversation = null,online=nul
                     {
                         conversation.last_message_date && (
                             <span className="text-nowrap">
-                                {conversation.last_message_date}
+                                {formatMessageDateShort(conversation.last_message_date)}
                             </span>
                         )
                     }

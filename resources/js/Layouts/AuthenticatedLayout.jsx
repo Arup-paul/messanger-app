@@ -4,6 +4,7 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Link, usePage} from '@inertiajs/react';
+import {useEventBus} from "@/EventBus";
 
 export default function Authenticated({  header, children }) {
     const page = usePage();
@@ -11,6 +12,8 @@ export default function Authenticated({  header, children }) {
     const conversations = page.props.conversations;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+
+    const {emit} = useEventBus();
 
     useEffect(() => {
          conversations.forEach((conversation) => {
@@ -50,7 +53,6 @@ export default function Authenticated({  header, children }) {
 
          });
 
-         //// 4:17 =======================================
          return () => {
                 conversations.forEach((conversation) => {
                     let channel = `message.group.${conversation.id}`;

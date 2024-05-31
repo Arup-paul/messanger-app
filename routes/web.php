@@ -12,10 +12,11 @@ Route::middleware('auth','verified')->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('home');
 
     Route::get('/user/{user}',[MessageController::class,'byUser'])->name('chat.user');
-    Route::get('/group/{user}',[MessageController::class,'byGroup'])->name('chat.group');
+    Route::get('/group/{group}',[MessageController::class,'byGroup'])->name('chat.group');
 
     Route::post('/message',[MessageController::class,'store'])->name('message.store');
     Route::delete('/message/{message}',[MessageController::class,'destroy'])->name('message.destroy');
+    Route::get('/message/{message}/load-older',[MessageController::class,'loadOlder'])->name('message.loadOlder');
 
 });
 
