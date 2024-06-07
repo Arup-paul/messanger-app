@@ -6,6 +6,7 @@ import ConversationHeader from "@/Components/App/ConversationHeader.jsx";
 import MessageItem from "@/Components/App/MessageItem.jsx";
 import MessageInput from "@/Components/App/MessageInput.jsx";
 import {useEventBus} from "@/EventBus";
+import AttachmentPreviewModal from "@/Components/App/AttachmentPreviewModal";
 
 function Home({ selectedConversations = null,messages = null }) {
     const [localMessages,setLocalMessages] = useState([]);
@@ -13,6 +14,8 @@ function Home({ selectedConversations = null,messages = null }) {
     const [scrollFromBottom,setScrollFromBottom] = useState(0);
     const messagesCtrRef = useRef(null);
     const lodMoreIntersect = useRef(null);
+    const [showAttachmentPreview,setShowAttachmentPreview] = useState(false);
+    const [previewAttachment,setPreviewAttachment] = useState({});
     const {on} = useEventBus();
 
     console.log("local",localMessages)
@@ -68,6 +71,14 @@ function Home({ selectedConversations = null,messages = null }) {
         ){
             setLocalMessages((prevMessages) => [...prevMessages,message]);
         }
+    }
+
+    const onAttachmentClick = (attachments,ind) => {
+         setPreviewAttachment({
+             attachments,
+             ind
+         });
+         setShowAttachmentPreview(true);
     }
 
 
@@ -185,9 +196,15 @@ function Home({ selectedConversations = null,messages = null }) {
                         </div>
                         <MessageInput conversation={selectedConversations}/>
                     </>
-                )
-
-          }
+                )}
+          { previewAttachment.attachments && (
+                  <AttachmentPreviewModal
+                        attachments={previewAttachment.attachments}
+                        ind={previewAttachment.ind}
+                        show={showAttachmentPreview}
+                        onClose={() => setShowAttachmentPreview(false)}
+                      />
+              )}
       </>
     );
 }
