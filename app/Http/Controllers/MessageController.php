@@ -12,7 +12,7 @@ use App\Models\MessageAttachment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Psy\Util\Str;
+use Illuminate\Support\Str;
 
 class MessageController extends Controller
 {
@@ -89,7 +89,7 @@ class MessageController extends Controller
                 'name' => $file->getClientOriginalName(),
                 'mime' => $file->getClientMimeType(),
                 'size' => $file->getSize(),
-               'path' => $file->store($directory,'public')
+               'url' => $file->store($directory,'public')
               ];
               $attachment = MessageAttachment::create($model);
               $attachments[] = $attachment;

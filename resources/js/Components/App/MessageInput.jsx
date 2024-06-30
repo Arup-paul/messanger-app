@@ -11,6 +11,7 @@ import EmojiPicker from "emoji-picker-react";
 import {Popover} from "@headlessui/react";
 import CustomAudioPlayer from "@/Components/App/CustomAudioPlayer";
 import AttachmentPreview from "@/Components/App/AttachmentPreview";
+import {isAudio, isImage} from "@/helpers.jsx";
 
 const MessageInput = ({conversation = null}) => {
     const [newMessage,setNewMessage] = useState("");
@@ -35,7 +36,7 @@ const MessageInput = ({conversation = null}) => {
 
 
     const onSendClick = () => {
-        if(newMessage.trim() === ''){
+        if(newMessage.trim() === '' && chosenFiles.length === 0){
             setInputErrorMessage("Message cannot be empty or upload attachment");
 
             setTimeout(() => {
@@ -100,7 +101,7 @@ const MessageInput = ({conversation = null}) => {
             <div className="order-2 flex-1 xs:flex-none xs:order-1 p-2">
                 <button className="p-1 text-gray-400 hover:text-gray-300 relative">
                     <PaperClipIcon className="w-6 "/>
-                    <input type="text"
+                    <input type="file"
                            multiple
                            onChange={onFileChange}
                            className="absolute left-0 top-0 right-0 bottom-0 z-20 opacity-0 cursor-pointer"
@@ -108,7 +109,7 @@ const MessageInput = ({conversation = null}) => {
                 </button>
                 <button className="p-1 text-gray-400 hover:text-gray-300 relative">
                     <PhotoIcon className="w-6 "/>
-                    <input type="text"
+                    <input type="file"
                            multiple
                            accept="image/*"
                            onChange={onFileChange}

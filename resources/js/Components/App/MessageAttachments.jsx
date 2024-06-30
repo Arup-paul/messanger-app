@@ -3,11 +3,13 @@ import {isAudio, isImage, isPDF, isPreviewable, isVideo} from "@/helpers.jsx";
 import {ArrowDownTrayIcon, PaperClipIcon, PlayCircleIcon} from "@heroicons/react/16/solid";
 
 const MessageAttachments = ({attachments,attachmentClick}) => {
+
+    console.log("attachment",attachments)
     return (
         <>
             {
                 attachments.length > 0 && (
-                    <div className="mt-2 flex flex-wrap justify-end gap-1">
+                    <div className="mt-2 flex flex-wrap justify-end gap-2  ">
                         {
                             attachments.map((attachment,ind) => (
                                 <div

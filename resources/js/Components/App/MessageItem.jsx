@@ -2,12 +2,14 @@ import {usePage}  from  "@inertiajs/react";
 import UserAvatar from "@/Components/App/UserAvatar.jsx";
 import {formatMessageDateLong} from "@/helpers.jsx";
 import ReactMarkdown from 'react-markdown';
-import MessageAttachments from "@/Components/App/MessageAttachments";
+import MessageAttachments from "./MessageAttachments";
 
 
 const MessageItem = ({ message,attachmentClick }) => {
     const currentUser = usePage().props.auth.user;
 
+
+//         6.20
 
 
     return (
