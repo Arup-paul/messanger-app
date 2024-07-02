@@ -9,7 +9,7 @@ const MessageAttachments = ({attachments,attachmentClick}) => {
         <>
             {
                 attachments.length > 0 && (
-                    <div className="mt-2 flex flex-wrap justify-end gap-2  ">
+                    <div className="mt-2 flex flex-wrap justify-end gap-4 ">
                         {
                             attachments.map((attachment,ind) => (
                                 <div
@@ -27,7 +27,7 @@ const MessageAttachments = ({attachments,attachmentClick}) => {
                                         !isAudio(attachment) && (
                                             <a
                                                 onClick={(ev) => ev.stopPropagation()}
-                                                download
+                                                // download
                                                 href={attachment.url}
                                                 className="z-20 opacity-100 group-hover:opacity-100
                                                  transition-all w-8 h-8 flex items-center justify-center
