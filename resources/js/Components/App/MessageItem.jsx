@@ -9,8 +9,6 @@ const MessageItem = ({ message,attachmentClick }) => {
     const currentUser = usePage().props.auth.user;
 
 
-//         6.20
-
 
     return (
         <>

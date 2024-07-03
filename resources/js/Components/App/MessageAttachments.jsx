@@ -2,9 +2,12 @@ import React from 'react';
 import {isAudio, isImage, isPDF, isPreviewable, isVideo} from "@/helpers.jsx";
 import {ArrowDownTrayIcon, PaperClipIcon, PlayCircleIcon} from "@heroicons/react/16/solid";
 
+//////6.46
+
+
 const MessageAttachments = ({attachments,attachmentClick}) => {
 
-    console.log("attachment",attachments)
+    console.log("attachment 1 ",attachments)
     return (
         <>
             {
@@ -27,7 +30,7 @@ const MessageAttachments = ({attachments,attachmentClick}) => {
                                         !isAudio(attachment) && (
                                             <a
                                                 onClick={(ev) => ev.stopPropagation()}
-                                                // download
+                                                download
                                                 href={attachment.url}
                                                 className="z-20 opacity-100 group-hover:opacity-100
                                                  transition-all w-8 h-8 flex items-center justify-center
@@ -35,6 +38,9 @@ const MessageAttachments = ({attachments,attachmentClick}) => {
                                                 "
                                             >
                                                 <ArrowDownTrayIcon className="w-4 h-4" />
+                                            </a>
+                                        )
+                                    }
 
                                                 {
                                                     isImage(attachment) && (
@@ -58,6 +64,7 @@ const MessageAttachments = ({attachments,attachmentClick}) => {
                                                 {
                                                     isAudio(attachment) && (
                                                         <div className="relative flex justify-center items-center">
+
                                                             <audio
                                                                 src={attachment.url}
                                                                 controls
@@ -96,9 +103,8 @@ const MessageAttachments = ({attachments,attachmentClick}) => {
                                                 }
 
 
-                                            </a>
-                                        )
-                                    }
+
+
 
                                 </div>
                             ))
